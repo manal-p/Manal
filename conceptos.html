@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conceptos Clave - El Jardín de Epicuro</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Poppins", sans-serif;
+            background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            color: #f5f5f5;
+        }
+
+        /* Partículas flotantes */
+        #particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        @keyframes gradientBG {
+            0% {
+                background-position: 0% 50%
+            }
+
+            50% {
+                background-position: 100% 50%
+            }
+
+            100% {
+                background-position: 0% 50%
+            }
+        }
+
+        h1 {
+            text-align: center;
+            margin: 30px 0 10px;
+            color: #ffb347;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .texto-explicativo {
+            max-width: 900px;
+            margin: 0 auto 30px auto;
+            text-align: center;
+            color: #ccc;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            height: 500px;
+            margin: 0 auto 50px auto;
+            background: rgba(40, 40, 40, 0.95);
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(255, 179, 71, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .messages {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .message {
+            max-width: 70%;
+            padding: 12px 20px;
+            border-radius: 25px;
+            line-height: 1.4;
+            animation: fadeIn 0.3s forwards;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .user {
+            background: linear-gradient(120deg, #ffb347, #ffc76e);
+            color: #000;
+            align-self: flex-end;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bot {
+            background: #555;
+            color: #fff;
+            align-self: flex-start;
+            border-bottom-left-radius: 5px;
+        }
+
+        @keyframes fadeIn {
+            0% {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .input-container {
+            display: flex;
+            border-top: 1px solid #333;
+            background: rgba(20, 20, 20, 0.9);
+            padding: 10px;
+        }
+
+        .input-container input {
+            flex: 1;
+            padding: 14px 20px;
+            border-radius: 30px 0 0 30px;
+            border: none;
+            outline: none;
+            font-size: 1rem;
+            background: #1c1c1c;
+            color: #fff;
+            box-shadow: inset 0 0 8px rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+        }
+
+        .input-container input:focus {
+            box-shadow: inset 0 0 10px #ffb347;
+        }
+
+        .input-container button {
+            padding: 14px 25px;
+            border: none;
+            background: #ffb347;
+            color: #000;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            border-radius: 0 30px 30px 0;
+            margin-left: -5px;
+            box-shadow: 0 4px 15px rgba(255, 179, 71, 0.3);
+            transition: all 0.3s;
+        }
+
+        .input-container button:hover {
+            background: #ffc76e;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(255, 179, 71, 0.4);
+        }
+
+        /* Botón menú */
+        .boton-menu {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: #ffb347;
+            color: #000;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .boton-menu:hover {
+            background: #ffc76e;
+            transform: translateY(-3px);
+        }
+
+        .menu-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            overflow-y: auto;
+            /* ahora puedes bajar */
+        }
+    </style>
+</head>
+
+<body>
+
+    <canvas id="particles"></canvas>
+    <header>
+        <h1>Conceptos Clave</h1>
+        <p>Explora los conceptos principales del epicureísmo y pregúntale al chat sobre ataraxia, aponía y más.</p>
+    </header>
+
+
+    <div class="chat-container">
+        <div class="messages" id="messages">
+            <div class="bot message">¡Hola! Soy tu guía sobre Epicureísmo. Pregúntame sobre conceptos clave como
+                ataraxia, aponía, placer, muerte o amistad.</div>
+        </div>
+
+        <div class="input-container">
+            <input type="text" id="userInput" placeholder="Escribe tu pregunta..." />
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
+
+    <script>
+        // Partículas flotantes
+        const canvas = document.getElementById('particles');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+        const particles = [];
+        for (let i = 0; i < 50; i++) {
+            particles.push({ x: Math.random() * canvas.width, y: Math.random() * canvas.height, r: Math.random() * 3 + 1, dx: (Math.random() - 0.5) * 0.3, dy: (Math.random() - 0.5) * 0.3 });
+        }
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                ctx.fillStyle = 'rgba(255,179,71,0.3)';
+                ctx.fill();
+                p.x += p.dx; p.y += p.dy;
+                if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+                if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+            });
+            requestAnimationFrame(animateParticles);
+        }
+        animateParticles();
+        window.addEventListener('resize', () => { canvas.width = window.innerWidth; canvas.height = window.innerHeight; });
+        const messages = document.getElementById('messages');
+        const userInput = document.getElementById('userInput');
+
+        const respuestas = {
+            "ataraxia": "La ataraxia es la ausencia de perturbación en el alma, un estado de serenidad total.",
+            "aponía": "La aponía es la ausencia de dolor en el cuerpo, alcanzando el bienestar físico.",
+            "aponia": "La aponía es la ausencia de dolor en el cuerpo, alcanzando el bienestar físico.",
+            "placer": "Epicuro definía el placer como la ausencia de dolor y perturbación, no como exceso o vicio.",
+            "muerte": "Epicuro enseñaba que la muerte no debe temerse porque es simplemente el fin de la sensación.",
+            "amistad": "La amistad era un valor central en Epicuro; contribuía a la felicidad y la seguridad personal."
+        };
+
+        function sendMessage() {
+            const text = userInput.value.trim();
+            if (text === "") return;
+
+            // Mensaje del usuario
+            const userMsg = document.createElement('div');
+            userMsg.classList.add('message', 'user');
+            userMsg.textContent = text;
+            messages.appendChild(userMsg);
+
+
+
+            // Simular "escribiendo"
+            const botMsg = document.createElement('div');
+            botMsg.classList.add('message', 'bot');
+            botMsg.innerHTML = '<img src="Epicuro2.png" alt="Epicuro"><span>...</span>';
+            messages.appendChild(botMsg);
+            messages.scrollTop = messages.scrollHeight;
+            // Respuesta del bot
+            setTimeout(() => {
+                let respuesta = "Lo siento, no tengo respuesta para eso.";
+                for (let key in respuestas) {
+                    if (text.toLowerCase().includes(key)) {
+                        respuesta = respuestas[key];
+                        break;
+                    }
+                }
+                botMsg.innerHTML = '<img src="Epicuro2.png" alt="Epicuro"><span>' + respuesta + '</span>';
+                messages.scrollTop = messages.scrollHeight;
+            }, 1000 + Math.random() * 500); // tiempo aleatorio de tipeo
+
+
+
+
+            // Scroll al último mensaje
+            messages.scrollTop = messages.scrollHeight;
+
+            userInput.value = "";
+            userInput.focus();
+        }
+
+        userInput.addEventListener("keydown", function (e) {
+            if (e.key === "Enter") sendMessage();
+        });
+    </script>
+    <button class="boton-menu" onclick="window.location.href='menu.html'">Volver al Menú</button>
+</body>
+
+</html>

@@ -1,0 +1,118 @@
+body {
+    margin: 0;
+    font-family: "Poppins", sans-serif;
+    background: linear-gradient(135deg, #0d0d0d, #001022);
+    background-size: 400% 400%;
+    animation: gradientBG 15s ease infinite;
+    color: #fff;
+    text-align: center;
+}
+
+@keyframes gradientBG {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.container {
+    padding: 50px 20px;
+}
+
+h1 {
+    color: #00bfff;
+    margin-bottom: 15px;
+}
+
+#question-container {
+    margin-top: 30px;
+}
+
+#options button {
+    margin: 10px;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 10px;
+    background-color: #00bfff;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, background 0.3s;
+}
+
+#options button:hover {
+    transform: scale(1.05);
+    background-color: #33ccff;
+}
+
+/* Overlay de reflexión */
+#overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+#reflection {
+    background: #111;
+    padding: 30px;
+    border-radius: 20px;
+    max-width: 600px;
+    color: #00bfff;
+    position: relative;
+    font-size: 1.2em;
+    text-align: center;
+}
+
+#closeOverlay {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #00bfff;
+}
+
+.camino-img {
+    width: 250px;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.camino-img:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 50px rgba(255, 179, 71, 0.6);
+}
+
+/* Botón menú */
+.boton-menu {
+    margin-top: 20px;
+    padding: 15px 30px;
+    background: #ffb347;
+    color: #000;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.boton-menu:hover {
+    background: #ffc76e;
+    transform: translateY(-3px);
+}

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solución Epicúrea</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #0d0d0d;
+            color: #f5f5f5;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 20px;
+            overflow-x: hidden;
+        }
+
+        /* Animación de rayos de luz */
+        #rays {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .ray {
+            position: absolute;
+            width: 2px;
+            height: 100%;
+            background: linear-gradient(transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: moveRay 3s linear infinite;
+        }
+
+        @keyframes moveRay {
+            0% {
+                transform: translateY(-100%) rotate(0deg);
+            }
+
+            100% {
+                transform: translateY(100%) rotate(360deg);
+            }
+        }
+
+        /* Títulos y texto */
+        h1 {
+            color: #ffb347;
+            font-size: 2.5em;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        p.intro {
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 30px;
+            color: #ccc;
+        }
+
+        /* Contenedor Tetrapharmakos */
+        .tetrapharmakos-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px;
+            max-width: 1000px;
+            width: 100%;
+        }
+
+
+        /* Botón menú */
+        .boton-menu {
+            margin-top: 30px;
+            padding: 15px 30px;
+            background: #ffb347;
+            color: #000;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .boton-menu:hover {
+            background: #ffc76e;
+            transform: translateY(-3px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Solución Epicúrea</h1>
+    <p class="intro">Al principio conoceras los 4 remedios para alcanzar una vida feliz segun Epicureo. Entonces,
+        aplicando los principios del Tetrapharmakos, Epicuro nos ofrece una guía para enfrentar un problema
+        actual, del siglo XXI de manera serena y racional.</p>
+
+    <div class="tetrapharmakos-container">
+        <div style="margin-top:40px; display:flex; justify-content:center; width:100%;">
+            <iframe
+                src="https://view.genially.com/690e4be7bf7118cb932bfe4a/presentation-mi-caja-del-tetrapharmakos-los-4-remedios-para-una-vida-feliz-segun-epicuro"
+                width="900" height="600"
+                style="border: none; border-radius: 20px; box-shadow:0 0 25px rgba(255,179,71,0.5);" allowfullscreen>
+            </iframe>
+        </div>
+    </div>
+
+
+    <div id="rays"></div>
+
+    <script>
+        // Generar rayos aleatorios
+        const numRays = 40;
+        const raysContainer = document.getElementById('rays');
+        for (let i = 0; i < numRays; i++) {
+            const ray = document.createElement('div');
+            ray.className = 'ray';
+            ray.style.left = Math.random() * 100 + '%';
+            ray.style.animationDuration = (2 + Math.random() * 3) + 's';
+            ray.style.height = (50 + Math.random() * 150) + 'px';
+            raysContainer.appendChild(ray);
+        }
+    </script>
+    <button class="boton-menu" onclick="window.location.href='menu.html'">Volver al Menú</button>
+
+</body>
+
+</html>

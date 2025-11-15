@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnóstico del problema</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: radial-gradient(circle at center, #0a0a0a, #2e2a0b);
+            color: #f5f5f5;
+            overflow-x: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        .contenedor {
+            max-width: 900px;
+            margin: 0 auto;
+            /* centra horizontalmente */
+            padding: 20px;
+        }
+
+        h1 {
+            color: #ffb347;
+            font-size: 2.3em;
+            text-align: center;
+            margin-bottom: 20px;
+            text-shadow: 1px 1px 10px rgb(41, 39, 1);
+        }
+
+        .pagina-interna {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            padding: 20px;
+        }
+
+        /* Botón menú */
+        .boton-menu {
+            margin-top: 20px;
+            padding: 15px 30px;
+            background: #ffb347;
+            color: #000;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: 0.3s;
+            z-index: 1000;
+            /* Para que quede encima de todo */
+        }
+
+        .boton-menu:hover {
+            background: #ffc76e;
+            transform: translateY(-3px);
+        }
+
+        .pagina-interna .video-container {
+            display: flex;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* Fondo animado tipo ondas */
+        .wave {
+            position: absolute;
+            bottom: 0;
+            width: 200%;
+            height: 200px;
+            background: linear-gradient(90deg, #00aaff33 0%, #ffaa0033 100%);
+            opacity: 0.5;
+            border-radius: 100%;
+            filter: blur(40px);
+            animation: moveWave 6s infinite linear;
+        }
+
+        .wave:nth-child(1) {
+            animation-duration: 6s;
+            animation-delay: 0s;
+        }
+
+        .wave:nth-child(2) {
+            animation-duration: 8s;
+            animation-delay: -2s;
+        }
+
+        .wave:nth-child(3) {
+            animation-duration: 10s;
+            animation-delay: -4s;
+        }
+
+        @keyframes moveWave {
+            from {
+                transform: translateX(0);
+            }
+
+            to {
+                transform: translateX(-50%);
+            }
+        }
+
+        /* Reproductor */
+        audio {
+            width: 80%;
+            margin-top: 40px;
+            z-index: 5;
+            filter: drop-shadow(0 0 10px #00aaff);
+        }
+
+
+
+        /* Efecto visual de ondas del sonido */
+        .visualizer {
+            display: flex;
+            gap: 6px;
+            margin-top: 25px;
+            height: 40px;
+            z-index: 5;
+        }
+
+        .bar {
+            width: 8px;
+            background: linear-gradient(to top, #00aaff, #ffaa00);
+            border-radius: 5px;
+            animation: bounce 1s infinite ease-in-out;
+        }
+
+        .bar:nth-child(2) {
+            animation-delay: 0.1s;
+        }
+
+        .bar:nth-child(3) {
+            animation-delay: 0.2s;
+        }
+
+        .bar:nth-child(4) {
+            animation-delay: 0.3s;
+        }
+
+        .bar:nth-child(5) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            100% {
+                height: 10px;
+            }
+
+            50% {
+                height: 40px;
+            }
+        }
+
+
+        /* Texto explicativo */
+        .card-text {
+            max-width: 800px;
+            background: rgba(58, 58, 58, 0.9);
+            border-radius: 20px;
+            padding: 25px;
+            margin: 20px;
+            text-align: justify;
+            line-height: 1.6;
+            font-size: 1rem;
+            opacity: 0;
+            animation: fadeIn 1s forwards 0.3s;
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contenedor"></div>
+    <h1>Diagnóstico del Problema Actual</h1>
+
+    <div class="card-text">
+        Analizamos cómo un problema del siglo XXI se relaciona con la filosofía de Epicuro.
+        Pulsa en los 3 puntos para descubrir el diagnóstico epicúreo del problema.
+    </div>
+
+    <div class="podcast-container">
+        <div class="wave"></div>
+        <div class="wave"></div>
+        <div class="wave"></div>
+
+        <div class="visualizer">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+        <audio controls>
+            <source src="podcast.mp3" type="audio/mpeg">
+
+        </audio>
+    </div>
+
+
+
+    <button class="boton-menu" onclick="window.location.href='menu.html'">Volver al Menú</button>
+    </div>
+</body>
+
+</html>
